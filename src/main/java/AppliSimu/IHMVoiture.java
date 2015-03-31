@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,13 +15,14 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import DomaineRoute.Route;
 import DomaineVoiture.Voiture;
 
-public class IHMVoiture extends JFrame implements Observer{
-
+public class IHMVoiture extends JFrame implements Observer {
 	private double paramatreConversionMetresPixels = 0.5;
 	private Voiture maVoiture;
 	private CommandeVoiture maCommandeVoiture;
+	private List<Route> mesRoutes;
 	
 	private void initGraphique() {
 		this.setTitle("Simulateur de Voiture");
@@ -31,9 +33,10 @@ public class IHMVoiture extends JFrame implements Observer{
 		this.setVisible(true);
 	}
 	
-	public IHMVoiture(Voiture maVoiture) {
+	public IHMVoiture(Voiture maVoiture, List<Route> mesRoutes) {
 		super();
 		this.maVoiture = maVoiture;
+		this.mesRoutes = mesRoutes;
 		maVoiture.addObserver(this);
 		initGraphique();
 	}
@@ -42,6 +45,7 @@ public class IHMVoiture extends JFrame implements Observer{
 		super();
 		initGraphique();
 		this.maVoiture = null;
+		this.mesRoutes = null;
 	}
 	
 	public int calculerPositionPixels(int xMetres) {
@@ -56,10 +60,20 @@ public class IHMVoiture extends JFrame implements Observer{
 	@Override
 	public void paint(Graphics contexteGraphique) {
 		super.paint(contexteGraphique);
+
+		dessinerRoute(contexteGraphique);
+
 		contexteGraphique.setColor(Color.red);
 		dessinerVoiture(contexteGraphique);
 	}
 
+	private void dessinerRoute(Graphics contexteGraphique) {
+		contexteGraphique.setColor(Color.BLACK);
+		for (Route route : mesRoutes) {
+			contexteGraphique.fillRect(route.getX(), route.getY(),
+					route.getWidth(), route.getHeight());
+		}
+	}
 
 	private void dessinerVoiture(Graphics contexteGraphique) {
 		int xMetres = maVoiture.getX();

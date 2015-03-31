@@ -18,6 +18,7 @@ public class Voiture extends Observable {
 
 	public void miseAJourPosition() {
 		miseAJourPositionX();
+		miseAJourPositionY();
 		notificationObservateur();
 	}
 
@@ -33,6 +34,18 @@ public class Voiture extends Observable {
 			x = 0;
 	}
 
+	private void miseAJourPositionY() {
+		if (directionEnDegres == 90)
+			y += vitesseMetreSeconde;
+		else
+			y -= vitesseMetreSeconde;
+
+		if (y > 1000)
+			y = 1000;
+		else if (y < 0)
+			y = 0;
+	}
+
 	private void notificationObservateur() {
 		this.setChanged();
 		this.notifyObservers();
@@ -42,9 +55,13 @@ public class Voiture extends Observable {
 		return x;
 	}
 
+	public int getY() {
+		return y;
+	}
+
 	public void accelerer() {
 		if (vitesseMetreSeconde < 100)
-			vitesseMetreSeconde += 10;	
+			vitesseMetreSeconde += 10;
 	}
 
 	public Object getVitesse() {
@@ -57,7 +74,6 @@ public class Voiture extends Observable {
 
 	public void setDirection(int angleDirection) {
 		this.directionEnDegres = angleDirection;
-		
 	}
 
 	public void inverserDirection() {
@@ -67,8 +83,6 @@ public class Voiture extends Observable {
 	}
 
 	public Object getDirection() {
-	return directionEnDegres;
+		return directionEnDegres;
 	}
-
-	
 }

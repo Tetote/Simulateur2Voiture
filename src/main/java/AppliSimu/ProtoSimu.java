@@ -2,9 +2,12 @@ package AppliSimu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Timer;
 
+import DomaineRoute.Route;
 import DomaineVoiture.Voiture;
 
 public class ProtoSimu {
@@ -14,7 +17,12 @@ public class ProtoSimu {
 	public static void main(String[] args) {
 
 		final Voiture maVoiture = new Voiture (100, 0, 10);
-		IHMVoiture monTriangle = new IHMVoiture(maVoiture);
+
+		final List<Route> mesRoutes = new ArrayList<Route>();
+		mesRoutes.add(new Route(0, 285, 505, 30));
+		mesRoutes.add(new Route(100, 0, 30, 505));
+
+		IHMVoiture monTriangle = new IHMVoiture(maVoiture, mesRoutes);
 		
 		Timer timerAvancer = new Timer(dureeUneSecondeEnMilliSecondes, new ActionListener() {
 			

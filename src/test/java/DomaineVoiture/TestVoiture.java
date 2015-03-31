@@ -12,7 +12,7 @@ public class TestVoiture {
 	
 	@Before
 	public void setUp(){
-		maVoiture = new Voiture (100, 0, 10);
+		maVoiture = new Voiture (100, 100, 10);
 	}
 	
 	@Test
@@ -21,6 +21,14 @@ public class TestVoiture {
 		maVoiture.miseAJourPosition();
 		
 		assertEquals(110, maVoiture.getX());
+	}
+
+	@Test
+	public void  testEvolutionYenFonctionVitesseSurUnTopSeconde() {
+
+		maVoiture.miseAJourPosition();
+
+		assertEquals(110, maVoiture.getY());
 	}
 	
 	@Test
