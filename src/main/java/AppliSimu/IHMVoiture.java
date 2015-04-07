@@ -78,11 +78,11 @@ public class IHMVoiture extends JFrame implements Observer {
 
     /**
      * Convertit les mètres en pixels.
-     * @param xMetres La distance en mètre.
+     * @param d La distance en mètre.
      * @return La distance en pixel.
      */
-    public final int calculerPositionPixels(final int xMetres) {
-        return (int) (PARAMATRE_CONVERSION_METRES_PIXELS * xMetres);
+    public final int calculerPositionPixels(final int d) {
+        return (int) (PARAMATRE_CONVERSION_METRES_PIXELS * d);
     }
 
     @Override
@@ -121,8 +121,10 @@ public class IHMVoiture extends JFrame implements Observer {
 			return;
 
 		int xMetres = maVoiture.getX();
+        int yMetres = maVoiture.getY();
         int xPixel = calculerPositionPixels(xMetres);
+        int yPixel = calculerPositionPixels(yMetres);
 		contexteGraphique.setColor(Color.RED);
-        contexteGraphique.fillRect(xPixel, 300, 30, 15);
+        contexteGraphique.fillRect(xPixel, yPixel, 30, 15);
     }
 }
