@@ -33,7 +33,7 @@ public final class ProtoSimu {
      */
     public static void main(final String[] args) {
 
-        final Voiture maVoiture = new Voiture(100, 0, 10);
+        final Voiture maVoiture = new Voiture(100, 600, 10);
 
         final List<Route> mesRoutes = new ArrayList<Route>();
         mesRoutes.add(new Route(0, 285, 505, 30));
