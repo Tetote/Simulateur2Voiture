@@ -93,10 +93,7 @@ public class IHMVoiture extends JFrame implements Observer {
     @Override
     public final void paint(final Graphics contexteGraphique) {
         super.paint(contexteGraphique);
-
         dessinerRoute(contexteGraphique);
-
-        contexteGraphique.setColor(Color.red);
         dessinerVoiture(contexteGraphique);
     }
 
@@ -105,7 +102,10 @@ public class IHMVoiture extends JFrame implements Observer {
      * @param contexteGraphique La fenêtre graphique.
      */
     private void dessinerRoute(final Graphics contexteGraphique) {
-        contexteGraphique.setColor(Color.BLACK);
+        if (mesRoutes == null)
+			return;
+
+		contexteGraphique.setColor(Color.BLACK);
         for (Route route : mesRoutes) {
             contexteGraphique.fillRect(route.getX(), route.getY(),
                     route.getWidth(), route.getHeight());
@@ -117,8 +117,12 @@ public class IHMVoiture extends JFrame implements Observer {
      * @param contexteGraphique La fenêtre graphique.
      */
     private void dessinerVoiture(final Graphics contexteGraphique) {
-        int xMetres = maVoiture.getX();
+        if (maVoiture == null)
+			return;
+
+		int xMetres = maVoiture.getX();
         int xPixel = calculerPositionPixels(xMetres);
+		contexteGraphique.setColor(Color.RED);
         contexteGraphique.fillRect(xPixel, 300, 30, 15);
     }
 }
