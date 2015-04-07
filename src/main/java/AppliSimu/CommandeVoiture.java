@@ -25,15 +25,15 @@ public class CommandeVoiture extends JPanel implements ActionListener {
      */
     private JButton boutonInverserDirection;
 
-	/**
-	 * Le bouton pour tourner à droite.
-	 */
-	private JButton boutonTournerADroite;
+    /**
+     * Le bouton pour tourner à droite.
+     */
+    private JButton boutonTournerADroite;
 
-	/**
-	 * Le bouton pour tourner à gauche.
-	 */
-	private JButton boutonTournerAGauche;
+    /**
+     * Le bouton pour tourner à gauche.
+     */
+    private JButton boutonTournerAGauche;
 
     /**
      * La voiture.
@@ -42,6 +42,7 @@ public class CommandeVoiture extends JPanel implements ActionListener {
 
     /**
      * Initialise une classe CommandeVoiture.
+     *
      * @param fenetre La fenêtre utilisée pour l'application.
      * @param voiture La voiture utilisée pour l'application.
      */
@@ -58,13 +59,13 @@ public class CommandeVoiture extends JPanel implements ActionListener {
         boutonInverserDirection.addActionListener(this);
         this.add(boutonInverserDirection);
 
-		boutonTournerADroite = new JButton("Tourner à droite");
-		boutonTournerADroite.addActionListener(this);
-		this.add(boutonTournerADroite);
+        boutonTournerADroite = new JButton("Tourner à droite");
+        boutonTournerADroite.addActionListener(this);
+        this.add(boutonTournerADroite);
 
-		boutonTournerAGauche = new JButton("Trouner à gauche");
-		boutonTournerAGauche.addActionListener(this);
-		this.add(boutonTournerAGauche);
+        boutonTournerAGauche = new JButton("Trouner à gauche");
+        boutonTournerAGauche.addActionListener(this);
+        this.add(boutonTournerAGauche);
 
         fenetre.add(this);
         this.maVoiture = voiture;
@@ -76,13 +77,13 @@ public class CommandeVoiture extends JPanel implements ActionListener {
         Object bouton = event.getSource();
 
         if (bouton == boutonAccelerer) {
-			maVoiture.accelerer();
-		} else if (bouton == boutonInverserDirection) {
+            maVoiture.accelerer();
+        } else if (bouton == boutonInverserDirection) {
             maVoiture.inverserDirection();
         } else if (bouton == boutonTournerADroite) {
-			maVoiture.tournerADroite();
-		} else if (bouton == boutonTournerAGauche) {
-			maVoiture.tournerAGauche();
-		}
+            maVoiture.tournerADroite();
+        } else if (bouton == boutonTournerAGauche) {
+            maVoiture.tournerAGauche();
+        }
     }
 }
