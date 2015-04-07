@@ -1,34 +1,67 @@
 package DomaineRoute;
 
-/**
- * Created by Théo Vaucher on 31/03/2015.
- */
 public class Route {
+    /**
+     *
+     */
     private int x;
+    /**
+     *
+     */
     private int y;
+    /**
+     *
+     */
     private int width;
+    /**
+     *
+     */
     private int height;
 
-    public Route(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    /**
+     *
+     * @param posX x position of Route.
+     * @param posY y position of Route.
+     * @param widthRoute width of Route.
+     * @param heightRoute height of Route.
+     */
+    public Route(final int posX, final int posY,
+                 final int widthRoute, final int heightRoute) {
+        this.x = posX;
+        this.y = posY;
+        this.width = widthRoute;
+        this.height = heightRoute;
     }
 
-    public int getX() {
+    /**
+     *
+     * @return x
+     */
+    public final int getX() {
         return x;
     }
 
-    public int getY() {
+    /**
+     *
+     * @return y
+     */
+    public final int getY() {
         return y;
     }
 
-    public int getWidth() {
+    /**
+     *
+     * @return width
+     */
+    public final int getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    /**
+     *
+     * @return height
+     */
+    public final int getHeight() {
         return height;
     }
 }
