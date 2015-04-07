@@ -3,9 +3,50 @@ package DomaineVoiture;
 import java.util.Observable;
 
 /**
- * Voiture
+ * Voiture.
  */
 public class Voiture extends Observable {
+
+    /**
+     * MAX VITESSE.
+     */
+    public static final int MAX_VITESSE = 100;
+    /**
+     * MIN X.
+     */
+    public static final int MIN_X = 0;
+    /**
+     * MAX X.
+     */
+    public static final int MAX_X = 1000;
+    /**
+     * MIN Y.
+     */
+    public static final int MIN_Y = 0;
+    /**
+     * MAX Y.
+     */
+    public static final int MAX_Y = 1000;
+    /**
+     * TOUR COMPLET.
+     */
+    public static final int TOUR_COMPLET = 360;
+    /**
+     * TO LEFT.
+     */
+    public static final int TO_LEFT = 0;
+    /**
+     * TO DOWN.
+     */
+    public static final int TO_DOWN = 90;
+    /**
+     * TO RIGHT.
+     */
+    public static final int TO_RIGHT = 180;
+    /**
+     * TO UP.
+     */
+    public static final int TO_UP = 270;
 
     /**
      * x position of Voiture.
@@ -26,13 +67,13 @@ public class Voiture extends Observable {
 
     /**
      *
-     * @param x position of Voiture.
-     * @param y position of Voiture.
+     * @param xPos position of Voiture.
+     * @param yPos position of Voiture.
      * @param vitesse vitesse of Voiture.
      */
-    public Voiture(final int x, final int y, final int vitesse) {
-        this.x = x;
-        this.y = y;
+    public Voiture(final int xPos, final int yPos, final int vitesse) {
+        this.x = xPos;
+        this.y = yPos;
         this.vitesseMetreSeconde = vitesse;
         this.directionEnDegres = 0;
     }
@@ -50,16 +91,16 @@ public class Voiture extends Observable {
      *
      */
     private void miseAJourPositionX() {
-        if (directionEnDegres == 0) {
+        if (directionEnDegres == TO_LEFT) {
             x += vitesseMetreSeconde;
-        } else if (directionEnDegres == 180) {
+        } else if (directionEnDegres == TO_RIGHT) {
             x -= vitesseMetreSeconde;
         }
 
-        if (x > 1000) {
-            x = 1000;
-        } else if (x < 0) {
-            x = 0;
+        if (x > MAX_X) {
+            x = MAX_X;
+        } else if (x < MIN_X) {
+            x = MIN_X;
         }
     }
 
@@ -67,16 +108,16 @@ public class Voiture extends Observable {
      *
      */
     private void miseAJourPositionY() {
-        if (directionEnDegres == 90) {
+        if (directionEnDegres == TO_DOWN) {
             y += vitesseMetreSeconde;
-        } else if (directionEnDegres == 270) {
+        } else if (directionEnDegres == TO_UP) {
             y -= vitesseMetreSeconde;
         }
 
-        if (y > 1000) {
-            y = 1000;
-        } else if (y < 0) {
-            y = 0;
+        if (y > MAX_Y) {
+            y = MAX_Y;
+        } else if (y < MIN_Y) {
+            y = MIN_Y;
         }
     }
 
@@ -108,7 +149,7 @@ public class Voiture extends Observable {
      *
      */
     public final void accelerer() {
-        if (vitesseMetreSeconde < 100) {
+        if (vitesseMetreSeconde < MAX_VITESSE) {
             vitesseMetreSeconde += 10;
         }
     }
@@ -142,7 +183,7 @@ public class Voiture extends Observable {
      */
     public final void inverserDirection() {
         directionEnDegres += 180;
-        directionEnDegres = directionEnDegres % 360;
+        directionEnDegres = directionEnDegres % TOUR_COMPLET;
     }
 
     /**
@@ -158,7 +199,7 @@ public class Voiture extends Observable {
      */
     public final void tournerADroite() {
         directionEnDegres += 90;
-        directionEnDegres = directionEnDegres % 360;
+        directionEnDegres = directionEnDegres % TOUR_COMPLET;
     }
 
     /**
@@ -166,6 +207,6 @@ public class Voiture extends Observable {
      */
     public final void tournerAGauche() {
         directionEnDegres += 270;
-        directionEnDegres = directionEnDegres % 360;
+        directionEnDegres = directionEnDegres % TOUR_COMPLET;
     }
 }
