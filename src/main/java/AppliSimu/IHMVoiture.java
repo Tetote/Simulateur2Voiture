@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import DomaineRoute.Route;
 import DomaineVoiture.Voiture;
@@ -103,10 +104,11 @@ public class IHMVoiture extends JFrame implements Observer {
      * @param contexteGraphique La fenêtre graphique.
      */
     private void dessinerRoute(final Graphics contexteGraphique) {
-        if (mesRoutes == null)
-			return;
+        if (mesRoutes == null) {
+            return;
+        }
 
-		contexteGraphique.setColor(Color.BLACK);
+        contexteGraphique.setColor(Color.BLACK);
         for (Route route : mesRoutes) {
             contexteGraphique.fillRect(route.getX(), route.getY(),
                     route.getWidth(), route.getHeight());
@@ -118,14 +120,15 @@ public class IHMVoiture extends JFrame implements Observer {
      * @param contexteGraphique La fenêtre graphique.
      */
     private void dessinerVoiture(final Graphics contexteGraphique) {
-        if (maVoiture == null)
-			return;
+        if (maVoiture == null) {
+            return;
+        }
 
-		int xMetres = maVoiture.getX();
+        int xMetres = maVoiture.getX();
         int yMetres = maVoiture.getY();
         int xPixel = calculerPositionPixels(xMetres);
         int yPixel = calculerPositionPixels(yMetres);
-		contexteGraphique.setColor(Color.RED);
+        contexteGraphique.setColor(Color.RED);
         contexteGraphique.fillRect(xPixel, yPixel, 30, 15);
     }
 }
