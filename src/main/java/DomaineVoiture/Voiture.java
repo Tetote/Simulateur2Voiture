@@ -190,7 +190,7 @@ public class Voiture extends Observable {
      *
      * @return direction
      */
-    public final Object getDirection() {
+    public final int getDirection() {
         return directionEnDegres;
     }
 
