@@ -11,67 +11,114 @@ import javax.swing.JFrame;
 import DomaineRoute.Route;
 import DomaineVoiture.Voiture;
 
+/**
+ * Réalise l'interface graphique de l'application.
+ */
 public class IHMVoiture extends JFrame implements Observer {
-	private double paramatreConversionMetresPixels = 0.5;
-	private Voiture maVoiture;
-	private CommandeVoiture maCommandeVoiture;
-	private List<Route> mesRoutes;
-	
-	private void initGraphique() {
-		this.setTitle("Simulateur de Voiture");
-		this.setSize(505, 505);
 
-		this.maCommandeVoiture = new CommandeVoiture(this, maVoiture);
+    /**
+     * paramètre de conversion de distance (1 pixel tout les 2 mètres).
+     */
+    private static final double PARAMATRE_CONVERSION_METRES_PIXELS = 0.5;
 
-		this.setVisible(true);
-	}
-	
-	public IHMVoiture(Voiture maVoiture, List<Route> mesRoutes) {
-		super();
-		this.maVoiture = maVoiture;
-		this.mesRoutes = mesRoutes;
-		maVoiture.addObserver(this);
-		initGraphique();
-	}
+    /**
+     * La voiture de l'application.
+     */
+    private final Voiture maVoiture;
 
-	public IHMVoiture() {
-		super();
-		initGraphique();
-		this.maVoiture = null;
-		this.mesRoutes = null;
-	}
-	
-	public int calculerPositionPixels(int xMetres) {
-		return (int) (paramatreConversionMetresPixels * xMetres);	
-	}
+    /**
+     * Les commandes implémentées pour la voiture.
+     */
+    private CommandeVoiture maCommandeVoiture;
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		this.repaint();
-	}
+    /**
+     * La liste des routes.
+     */
+    private List<Route> mesRoutes;
 
-	@Override
-	public void paint(Graphics contexteGraphique) {
-		super.paint(contexteGraphique);
+    /**
+     * La taille de la fenêtre.
+     */
+    private static final int SIZE = 505;
 
-		dessinerRoute(contexteGraphique);
+    /**
+     * Initialise l'interface graphique de l'application.
+     */
+    private void initGraphique() {
+        this.setTitle("Simulateur de Voiture");
+        this.setSize(SIZE, SIZE);
 
-		contexteGraphique.setColor(Color.red);
-		dessinerVoiture(contexteGraphique);
-	}
+        this.maCommandeVoiture = new CommandeVoiture(this, maVoiture);
 
-	private void dessinerRoute(Graphics contexteGraphique) {
-		contexteGraphique.setColor(Color.BLACK);
-		for (Route route : mesRoutes) {
-			contexteGraphique.fillRect(route.getX(), route.getY(),
-					route.getWidth(), route.getHeight());
-		}
-	}
+        this.setVisible(true);
+    }
 
-	private void dessinerVoiture(Graphics contexteGraphique) {
-		int xMetres = maVoiture.getX();
-		int xPixel = calculerPositionPixels(xMetres);
-		contexteGraphique.fillRect(xPixel, 300, 30, 15);
-	}
-	
+    /**
+     * Initialise une classe IHMVoiture.
+     * @param voiture La voiture de l'application.
+     * @param routes Les routes de l'application.
+     */
+    public IHMVoiture(final Voiture voiture, final List<Route> routes) {
+        super();
+        this.maVoiture = voiture;
+        this.mesRoutes = routes;
+        voiture.addObserver(this);
+        initGraphique();
+    }
+
+    /**
+     * Initialise une classe IHMVoiture sans voiture ni routes.
+     */
+    public IHMVoiture() {
+        super();
+        initGraphique();
+        this.maVoiture = null;
+        this.mesRoutes = null;
+    }
+
+    /**
+     * Convertit les mètres en pixels.
+     * @param xMetres La distance en mètre.
+     * @return La distance en pixel.
+     */
+    public final int calculerPositionPixels(final int xMetres) {
+        return (int) (PARAMATRE_CONVERSION_METRES_PIXELS * xMetres);
+    }
+
+    @Override
+    public final void update(final Observable arg0, final Object arg1) {
+        this.repaint();
+    }
+
+    @Override
+    public final void paint(final Graphics contexteGraphique) {
+        super.paint(contexteGraphique);
+
+        dessinerRoute(contexteGraphique);
+
+        contexteGraphique.setColor(Color.red);
+        dessinerVoiture(contexteGraphique);
+    }
+
+    /**
+     * Dessine les routes de l'application.
+     * @param contexteGraphique La fenêtre graphique.
+     */
+    private void dessinerRoute(final Graphics contexteGraphique) {
+        contexteGraphique.setColor(Color.BLACK);
+        for (Route route : mesRoutes) {
+            contexteGraphique.fillRect(route.getX(), route.getY(),
+                    route.getWidth(), route.getHeight());
+        }
+    }
+
+    /**
+     * Dessine la voiture de l'application.
+     * @param contexteGraphique La fenêtre graphique.
+     */
+    private void dessinerVoiture(final Graphics contexteGraphique) {
+        int xMetres = maVoiture.getX();
+        int xPixel = calculerPositionPixels(xMetres);
+        contexteGraphique.fillRect(xPixel, 300, 30, 15);
+    }
 }

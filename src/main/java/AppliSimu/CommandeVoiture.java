@@ -31,7 +31,7 @@ public class CommandeVoiture extends JPanel implements ActionListener {
     private Voiture maVoiture;
 
     /**
-     * Ajoute les commandes à la fenêtre placée en paramètre.
+     * Initialise une classe CommandeVoiture.
      * @param fenetre La fenêtre utilisée pour l'application.
      * @param voiture La voiture utilisée pour l'application.
      */
