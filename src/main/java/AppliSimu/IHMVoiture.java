@@ -128,7 +128,20 @@ public class IHMVoiture extends JFrame implements Observer {
         int yMetres = maVoiture.getY();
         int xPixel = calculerPositionPixels(xMetres);
         int yPixel = calculerPositionPixels(yMetres);
-        contexteGraphique.setColor(Color.RED);
-        contexteGraphique.fillRect(xPixel, yPixel, 30, 15);
+
+		contexteGraphique.setColor(Color.RED);
+
+        int widthVoiture = 0;
+        int heightVoiture = 0;
+
+        if (maVoiture.getDirection() == Voiture.TO_LEFT || maVoiture.getDirection() == Voiture.TO_RIGHT) {
+            widthVoiture = 30;
+            heightVoiture = 15;
+        } else if (maVoiture.getDirection() == Voiture.TO_UP || maVoiture.getDirection() == Voiture.TO_DOWN) {
+            widthVoiture = 15;
+            heightVoiture = 30;
+        }
+
+        contexteGraphique.fillRect(xPixel, yPixel, widthVoiture, heightVoiture);
     }
 }
