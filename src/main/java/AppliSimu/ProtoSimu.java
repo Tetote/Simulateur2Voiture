@@ -10,33 +10,50 @@ import javax.swing.Timer;
 import DomaineRoute.Route;
 import DomaineVoiture.Voiture;
 
-public class ProtoSimu {
+/**
+ * Correspond au "main" de l'application.
+ */
+public final class ProtoSimu {
 
-	public static final int dureeUneSecondeEnMilliSecondes = 1000;
+    /**
+     * Constructeur privé pour éviter une instanciation inutile de la classe.
+     */
+    private ProtoSimu() {
 
-	public static void main(String[] args) {
+    }
 
-		final Voiture maVoiture = new Voiture (100, 0, 10);
+    /**
+     * Nom explicite.
+     */
+    public static final int DUREE_UNE_SECONDE_EN_MILLI_SECONDES = 1000;
 
-		final List<Route> mesRoutes = new ArrayList<Route>();
-		mesRoutes.add(new Route(0, 285, 505, 30));
-		mesRoutes.add(new Route(100, 0, 30, 505));
+    /**
+     * Le main de l'application.
+     * @param args Les arguments donnés en paramètres.
+     */
+    public static void main(final String[] args) {
 
-		IHMVoiture monTriangle = new IHMVoiture(maVoiture, mesRoutes);
-		
-		Timer timerAvancer = new Timer(dureeUneSecondeEnMilliSecondes, new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				maVoiture.miseAJourPosition();
-			}
-		});
-		
-		timerAvancer.start();
-		
-		while(true){
-		}
+        final Voiture maVoiture = new Voiture(100, 0, 10);
 
-	}
+        final List<Route> mesRoutes = new ArrayList<Route>();
+        mesRoutes.add(new Route(0, 285, 505, 30));
+        mesRoutes.add(new Route(100, 0, 30, 505));
 
+        IHMVoiture monTriangle = new IHMVoiture(maVoiture, mesRoutes);
+
+        Timer timerAvancer = new Timer(
+                DUREE_UNE_SECONDE_EN_MILLI_SECONDES, new ActionListener() {
+
+            @Override
+            public void actionPerformed(final ActionEvent arg0) {
+                maVoiture.miseAJourPosition();
+            }
+        });
+
+        timerAvancer.start();
+
+        while (true) {
+
+        }
+    }
 }
