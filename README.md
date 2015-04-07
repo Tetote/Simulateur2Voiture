@@ -6,7 +6,7 @@ Le logiciel est constitué de 2 packages
 - DomaineVoiture
 
 
-AppliSimu constitue la partie "view et controler", 
+AppliSimu constitue la partie "view et controler",
 DomaineVOiture la partie Model.
 
 

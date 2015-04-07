@@ -10,39 +10,56 @@ import javax.swing.JPanel;
 
 import DomaineVoiture.Voiture;
 
-public class CommandeVoiture extends JPanel implements ActionListener{
-	
-	private JButton boutonAccelerer;
-	private JButton boutonInverserDirection;
-	private Voiture maVoiture;
-	
-	
-	public CommandeVoiture (JFrame fenetre, Voiture maVoiture) {
-		
-		super();
-		this.setLayout(new FlowLayout());
- 
-		boutonAccelerer = new JButton("Accelerer");
-		boutonAccelerer.addActionListener(this);
-		this.add(boutonAccelerer);
+/**
+ * Contient les commandes modifiant le comportement de la voiture.
+ */
+public class CommandeVoiture extends JPanel implements ActionListener {
 
-		boutonInverserDirection = new JButton("Changer direction");
-		boutonInverserDirection.addActionListener(this);
-		this.add(boutonInverserDirection);
-		
-		fenetre.add(this);
-		this.maVoiture = maVoiture;
-	}
+    /**
+     * Le bouton pour accélérer la voiture.
+     */
+    private JButton boutonAccelerer;
+
+    /**
+     * Le bouton pour faire faire un demi-tour à la voiture.
+     */
+    private JButton boutonInverserDirection;
+
+    /**
+     * La voiture.
+     */
+    private Voiture maVoiture;
+
+    /**
+     * Ajoute les commandes à la fenêtre placée en paramètre.
+     * @param fenetre La fenêtre utilisée pour l'application.
+     * @param voiture La voiture utilisée pour l'application.
+     */
+    public CommandeVoiture(final JFrame fenetre, final Voiture voiture) {
+
+        super();
+        this.setLayout(new FlowLayout());
+
+        boutonAccelerer = new JButton("Accelerer");
+        boutonAccelerer.addActionListener(this);
+        this.add(boutonAccelerer);
+
+        boutonInverserDirection = new JButton("Changer direction");
+        boutonInverserDirection.addActionListener(this);
+        this.add(boutonInverserDirection);
+
+        fenetre.add(this);
+        this.maVoiture = voiture;
+    }
 
 
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		Object bouton = event.getSource();
-		if (bouton == boutonAccelerer)
-			maVoiture.accelerer();
-		else
-			maVoiture.inverserDirection();
-	}
-	
-
+    @Override
+    public final void actionPerformed(final ActionEvent event) {
+        Object bouton = event.getSource();
+        if (bouton == boutonAccelerer) {
+            maVoiture.accelerer();
+        } else {
+            maVoiture.inverserDirection();
+        }
+    }
 }
