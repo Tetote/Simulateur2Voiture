@@ -17,7 +17,7 @@ public class TestVoiture {
 	
 	@Test
 	public void  testEvolutionXenFonctionVitesseSurUnTopSeconde() {
-		
+		maVoiture.setDirection(0);
 		maVoiture.miseAJourPosition();
 		
 		assertEquals(110, maVoiture.getX());
@@ -25,7 +25,7 @@ public class TestVoiture {
 
 	@Test
 	public void  testEvolutionYenFonctionVitesseSurUnTopSeconde() {
-
+		maVoiture.setDirection(90);
 		maVoiture.miseAJourPosition();
 
 		assertEquals(110, maVoiture.getY());
@@ -84,6 +84,20 @@ public class TestVoiture {
 		maVoiture.miseAJourPosition();
 		assertEquals(0, maVoiture.getX());
 		
+	}
+
+	@Test
+	public void testTournerADroite() {
+		maVoiture.setDirection(0);
+		maVoiture.tournerADroite();
+		assertEquals(90, maVoiture.getDirection());
+	}
+
+	@Test
+	public void testTournerAGauche() {
+		maVoiture.setDirection(0);
+		maVoiture.tournerAGauche();
+		assertEquals(270, maVoiture.getDirection());
 	}
 	
 }

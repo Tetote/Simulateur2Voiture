@@ -2,87 +2,170 @@ package DomaineVoiture;
 
 import java.util.Observable;
 
+/**
+ * Voiture
+ */
 public class Voiture extends Observable {
 
-	private int x;
-	private int y;
-	private int vitesseMetreSeconde;
-	private int directionEnDegres;
+    /**
+     * x position of Voiture.
+     */
+    private int x;
+    /**
+     * y position of Voiture.
+     */
+    private int y;
+    /**
+     * vitesse of Voiture (m/s).
+     */
+    private int vitesseMetreSeconde;
+    /**
+     * direction of Voiture (degree).
+     */
+    private int directionEnDegres;
 
-	public Voiture(int x, int y, int vitesse) {
-		this.x = x;
-		this.y = y;
-		this.vitesseMetreSeconde = vitesse;
-		this.directionEnDegres = 0;
-	}
+    /**
+     *
+     * @param x position of Voiture.
+     * @param y position of Voiture.
+     * @param vitesse vitesse of Voiture.
+     */
+    public Voiture(final int x, final int y, final int vitesse) {
+        this.x = x;
+        this.y = y;
+        this.vitesseMetreSeconde = vitesse;
+        this.directionEnDegres = 0;
+    }
 
-	public void miseAJourPosition() {
-		miseAJourPositionX();
-		miseAJourPositionY();
-		notificationObservateur();
-	}
+    /**
+     *
+     */
+    public final void miseAJourPosition() {
+        miseAJourPositionX();
+        miseAJourPositionY();
+        notificationObservateur();
+    }
 
-	private void miseAJourPositionX() {
-		if (directionEnDegres == 0)
-			x += vitesseMetreSeconde;
-		else
-			x -= vitesseMetreSeconde;
-		
-		if (x > 1000)
-			x = 1000;
-		else if (x < 0)
-			x = 0;
-	}
+    /**
+     *
+     */
+    private void miseAJourPositionX() {
+        if (directionEnDegres == 0) {
+            x += vitesseMetreSeconde;
+        } else if (directionEnDegres == 180) {
+            x -= vitesseMetreSeconde;
+        }
 
-	private void miseAJourPositionY() {
-		if (directionEnDegres == 90)
-			y += vitesseMetreSeconde;
-		else
-			y -= vitesseMetreSeconde;
+        if (x > 1000) {
+            x = 1000;
+        } else if (x < 0) {
+            x = 0;
+        }
+    }
 
-		if (y > 1000)
-			y = 1000;
-		else if (y < 0)
-			y = 0;
-	}
+    /**
+     *
+     */
+    private void miseAJourPositionY() {
+        if (directionEnDegres == 90) {
+            y += vitesseMetreSeconde;
+        } else if (directionEnDegres == 270) {
+            y -= vitesseMetreSeconde;
+        }
 
-	private void notificationObservateur() {
-		this.setChanged();
-		this.notifyObservers();
-	}
+        if (y > 1000) {
+            y = 1000;
+        } else if (y < 0) {
+            y = 0;
+        }
+    }
 
-	public int getX() {
-		return x;
-	}
+    /**
+     *
+     */
+    private void notificationObservateur() {
+        this.setChanged();
+        this.notifyObservers();
+    }
 
-	public int getY() {
-		return y;
-	}
+    /**
+     *
+     * @return x
+     */
+    public final int getX() {
+        return x;
+    }
 
-	public void accelerer() {
-		if (vitesseMetreSeconde < 100)
-			vitesseMetreSeconde += 10;
-	}
+    /**
+     *
+     * @return y
+     */
+    public final int getY() {
+        return y;
+    }
 
-	public Object getVitesse() {
-		return vitesseMetreSeconde;
-	}
+    /**
+     *
+     */
+    public final void accelerer() {
+        if (vitesseMetreSeconde < 100) {
+            vitesseMetreSeconde += 10;
+        }
+    }
 
-	public void setVitesse(int vitesse) {
-		vitesseMetreSeconde = vitesse;
-	}
+    /**
+     *
+     * @return vitesse
+     */
+    public final Object getVitesse() {
+        return vitesseMetreSeconde;
+    }
 
-	public void setDirection(int angleDirection) {
-		this.directionEnDegres = angleDirection;
-	}
+    /**
+     *
+     * @param vitesse vitesse
+     */
+    public final void setVitesse(final int vitesse) {
+        vitesseMetreSeconde = vitesse;
+    }
 
-	public void inverserDirection() {
-		directionEnDegres +=180 ;
-		directionEnDegres = directionEnDegres % 360;
-		
-	}
+    /**
+     *
+     * @param angleDirection direction
+     */
+    public final void setDirection(final int angleDirection) {
+        this.directionEnDegres = angleDirection;
+    }
 
-	public Object getDirection() {
-		return directionEnDegres;
-	}
+    /**
+     *
+     */
+    public final void inverserDirection() {
+        directionEnDegres += 180;
+        directionEnDegres = directionEnDegres % 360;
+    }
+
+    /**
+     *
+     * @return direction
+     */
+    public final Object getDirection() {
+        return directionEnDegres;
+    }
+
+    /**
+     *
+     */
+    public final void tournerADroite() {
+        directionEnDegres += 90;
+        directionEnDegres = directionEnDegres % 360;
+    }
+
+    /**
+     *
+     */
+    public final void tournerAGauche() {
+        directionEnDegres += 270;
+        directionEnDegres = directionEnDegres % 360;
+    }
 }
