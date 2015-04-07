@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import DomaineRoute.Route;
 import DomaineVoiture.Voiture;
@@ -64,6 +64,7 @@ public class IHMVoiture extends JFrame implements Observer {
         this.mesRoutes = routes;
         voiture.addObserver(this);
         initGraphique();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     /**
